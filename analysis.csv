@@ -1,0 +1,43 @@
+import pandas as pd  
+import numpy as np   
+
+ Generate synthetic data mimicking the Iris dataset
+np.random.seed(42) 
+
+# Define the species
+species_list = ['setosa', 'versicolor', 'virginica']
+
+# Generate random measurements for each species 
+data = {
+    'sepal_length': np.concatenate([
+        np.random.normal(5.0, 0.35, 50),  
+        np.random.normal(5.9, 0.52, 50),  
+        np.random.normal(6.6, 0.64, 50)   
+    ]),
+    'sepal_width': np.concatenate([
+        np.random.normal(3.4, 0.38, 50),
+        np.random.normal(2.8, 0.31, 50),
+        np.random.normal(3.0, 0.32, 50)
+    ]),
+    'petal_length': np.concatenate([
+        np.random.normal(1.5, 0.17, 50),
+        np.random.normal(4.3, 0.47, 50),
+        np.random.normal(5.6, 0.55, 50)
+    ]),
+    'petal_width': np.concatenate([
+        np.random.normal(0.2, 0.11, 50),
+        np.random.normal(1.3, 0.20, 50),
+        np.random.normal(2.0, 0.27, 50)
+    ]),
+    'species': np.repeat(species_list, 50)  # Repeat each species 50 times
+}
+
+#Create a Pandas DataFrame from the data
+df = pd.DataFrame(data)
+
+#Save the DataFrame to a CSV file
+# This creates 'iris.csv' in your working directory. You can change the filename/path if needed.
+df.to_csv('iris.csv', index=False)  # index=False prevents adding an extra index column
+print("CSV file 'iris.csv' created successfully!")
+print("First 5 rows of the generated data:")
+print(df.head())
